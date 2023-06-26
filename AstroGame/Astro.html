@@ -4,11 +4,18 @@
     <link rel="stylesheet" href="../css/astroGame.css" />
   </head>
   <body>
+    <div class="image-clickable-home">
+      <a href="index.html">
+        <img src="./assets/images/unnamed.png" alt="" />
+      </a>
+    </div>
     <div id="game-container">
       <div id="astronaut" class="square">&#128104;</div>
     </div>
-    <p>Score: <span id="score">0</span></p>
-    <button id="start-button">Start</button>
+    <div class="score-and-start">
+      <p class="score-paragraphe">Score: <span id="score">0</span></p>
+      <button id="start-button">Start</button>
+    </div>
 
     <script>
       var gameContainer = document.getElementById('game-container');
