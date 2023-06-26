@@ -75,9 +75,9 @@
         square.style.top = -astronautSize + 'px';
 
         if (className === 'alien') {
-          square.innerHTML = '&#128125;'; // Emoji d'extraterrestre
+          square.innerHTML = '&#128125;';
         } else if (className === 'rocket') {
-          square.innerHTML = '&#128640;'; // Emoji de fusée
+          square.innerHTML = '&#128640;';
         }
 
         gameContainer.appendChild(square);
@@ -103,7 +103,6 @@
             astronautRect.top < alienRect.top + alienRect.height &&
             astronautRect.top + astronautRect.height > alienRect.top
           ) {
-            // Collision avec l'extraterrestre
             clearInterval(alienInterval);
             clearInterval(rocketInterval);
             alert('Game Over! Score: ' + score);
@@ -122,7 +121,6 @@
             astronautRect.top < rocketRect.top + rocketRect.height &&
             astronautRect.top + astronautRect.height > rocketRect.top
           ) {
-            // Collision avec la fusée
             gameContainer.removeChild(rocket);
             updateScore();
           }
@@ -139,7 +137,6 @@
           alien.style.top = topPosition + 'px';
 
           if (topPosition > containerHeight) {
-            // Supprimer l'extraterrestre s'il sort du conteneur de jeu
             gameContainer.removeChild(alien);
           }
         }
@@ -150,7 +147,6 @@
           rocket.style.top = topPosition + 'px';
 
           if (topPosition > containerHeight) {
-            // Supprimer la fusée si elle sort du conteneur de jeu
             gameContainer.removeChild(rocket);
           }
         }
