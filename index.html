@@ -21,6 +21,7 @@
       let scoreList = localStorage.getItem('scoreList');
       let playerNameOnly = localStorage.getItem('player');
       console.log(playerNameOnly);
+      console.log(scoreList);
 
       // Si la liste des scores existe dans le stockage local, la convertir en tableau
       if (scoreList) {
@@ -50,8 +51,6 @@
 
         // Sauvegarder la liste des scores dans le stockage local
         localStorage.setItem('scoreList', JSON.stringify(scoreList));
-
-        console.log(scoreList);
 
         playerNameInput.value = '';
       });
