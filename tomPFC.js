@@ -29,7 +29,6 @@ for (let i = 0; i < buttons.length; i++) {
       robotScore++;
     }
 
-    const scoreMessage = `Scores : Joueur ${joueurScore} | Robot ${robotScore} | Égalité ${egaliteScore}`;
     const resultMessage = `Joueur : ${joueur}. Robot : ${robot}. Résultat : ${resultat} !`;
     const humanScore = ` Joueur : ${joueurScore}  `;
     const robotDisplayScore = ` Robot : ${robotScore}  `;
