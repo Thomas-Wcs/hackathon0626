@@ -1,7 +1,7 @@
 var config = {
   type: Phaser.AUTO,
-  width: 1500,
-  height: 800,
+  width: window.innerWidth * 0.95,
+  height: window.innerHeight * 0.85,
   physics: {
     default: 'arcade',
     arcade: {
@@ -74,10 +74,24 @@ function create() {
   poops = this.physics.add.group();
   atomes = this.physics.add.group();
 
-  this.physics.add.collider(bullets, creatures, hitCreature, null, this);
+  this.physics.add.collider(
+    bullets,
+    creatures,
+    hitCreature,
+    hitPetacall,
+    null,
+    this
+  );
   this.physics.add.collider(player, creatures, hitPlayer, null, this);
   this.physics.add.collider(player, poops, hitPoop, null, this);
-  this.physics.add.collider(atomes, creatures, hitCreature, null, this);
+  this.physics.add.collider(
+    atomes,
+    creatures,
+    hitCreature,
+    hitPetacall,
+    null,
+    this
+  );
   this.physics.add.collider(atomes, peta, hitPeta, null, this);
   this.physics.add.collider(atomes, player, hitPlayer, null, this);
 
@@ -215,7 +229,8 @@ function update(time) {
   }
 }
 
-function hitCreature(bullet, creature) {
+function hitPetacall(bullet, creature) {
+  console.log('toto');
   bullet.setActive(false);
   bullet.setVisible(false);
   creature.disableBody(true, true);

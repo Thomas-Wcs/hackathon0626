@@ -35,9 +35,9 @@ body {
   background-color: transparent;
 }
 #start-button {
-  font-size: 34px;
+  font-size: 38px;
   background-color: transparent;
-  color: #fff8f8;
+  color: #f20000;
   border: none;
   outline: none;
 }
@@ -88,4 +88,11 @@ body {
 .game-over-overlay button {
   padding: 10px 20px;
   font-size: 18px;
+}
+.image-clickable-home {
+  width: 100px;
+}
+.image-clickable-home img {
+  border-radius: 30px;
+  width: 100px;
 }
