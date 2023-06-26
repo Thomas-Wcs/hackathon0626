@@ -17,13 +17,16 @@
       <a href="./AstroGame/Astro.html">Astro </a>
     </div>
     <script>
-      let player = localStorage.getItem('player');
-      console.log(player);
+      // Récupérer la liste des scores depuis le stockage local
+      let scoreList = localStorage.getItem('scoreList');
+      let playerNameOnly = localStorage.getItem('player');
+      console.log(playerNameOnly);
 
-      if (player) {
-        player = JSON.parse(player);
+      // Si la liste des scores existe dans le stockage local, la convertir en tableau
+      if (scoreList) {
+        scoreList = JSON.parse(scoreList);
       } else {
-        player = '';
+        scoreList = []; // Tableau vide si aucune liste des scores n'est trouvée dans le stockage local
       }
 
       const playerForm = document.getElementById('playerForm');
@@ -34,11 +37,21 @@
         const playerNameInput = document.getElementById('playerName');
         const playerName = playerNameInput.value;
 
-        player = playerName;
+        const score = Number;
 
-        localStorage.setItem('player', JSON.stringify(player));
+        // Créer un objet pour stocker le nom du joueur et son score
+        const playerScore = {
+          name: playerName,
+          score: score,
+        };
 
-        console.log('Nom du joueur :', player);
+        // Ajouter le score du joueur à la liste des scores
+        scoreList.push(playerScore);
+
+        // Sauvegarder la liste des scores dans le stockage local
+        localStorage.setItem('scoreList', JSON.stringify(scoreList));
+
+        console.log(scoreList);
 
         playerNameInput.value = '';
       });
