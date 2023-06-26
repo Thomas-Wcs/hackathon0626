@@ -12,6 +12,7 @@
           <img src="./assets/images/unnamed.png" alt="" />
         </a>
       </div>
+      <div id="playButton"></div>
       <h2>Pierre Feuille Ciseaux !</h2>
       <h4>
         Pierre Feuille Ciseaux est un jeu classique et amusant qui mettra à
@@ -58,6 +59,29 @@
       </div>
     </div>
 
+    <audio id="clickSound" autoplay loop>
+      <source src="./assets/videos/chil1.mp3" type="audio/mpeg" />
+    </audio>
+
+    <script>
+      const playButton = document.getElementById('playButton');
+      const clickSound = document.getElementById('clickSound');
+
+      let isPlaying = false;
+
+      playButton.addEventListener('click', function () {
+        if (isPlaying) {
+          clickSound.pause();
+          isPlaying = false;
+          playButton.style.backgroundImage = "url('./assets/images/son2.png')";
+        } else {
+          clickSound.play();
+          isPlaying = true;
+          playButton.style.backgroundImage =
+            "url('./assets/images/sonNon.png')";
+        }
+      });
+    </script>
     <script src="tomPFC.js"></script>
   </body>
 </html>
