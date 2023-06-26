@@ -2,6 +2,7 @@
 <html>
   <head>
     <link rel="stylesheet" href="../css/astroGame.css" />
+    <style></style>
   </head>
   <body>
     <div class="image-clickable-home">
@@ -17,11 +18,19 @@
       <button id="start-button">Start</button>
     </div>
 
+    <div class="game-over-overlay" id="game-over-overlay">
+      <h1>Game Over! Score: <span id="final-score">0</span></h1>
+      <button id="start-again-button">Start Again</button>
+    </div>
+
     <script>
       var gameContainer = document.getElementById('game-container');
       var astronaut = document.getElementById('astronaut');
       var scoreElement = document.getElementById('score');
       var startButton = document.getElementById('start-button');
+      var startAgainButton = document.getElementById('start-again-button');
+      var gameOverOverlay = document.getElementById('game-over-overlay');
+      var finalScoreElement = document.getElementById('final-score');
 
       var score = 0;
       var gameSpeed = 2;
@@ -76,8 +85,7 @@
           ) {
             clearInterval(alienInterval);
             clearInterval(rocketInterval);
-            alert('Game Over! Score: ' + score);
-            resetGame();
+            showGameOver();
           }
         }
 
@@ -163,6 +171,13 @@
         startGame();
       });
 
+      startAgainButton.addEventListener('click', function () {
+        gameOverOverlay.style.display = 'none';
+        startButton.disabled = true;
+        resetGame();
+        startGame();
+      });
+
       function resetGame() {
         clearInterval(alienInterval);
         clearInterval(rocketInterval);
@@ -182,6 +197,12 @@
 
         score = 0;
         scoreElement.textContent = score;
+      }
+
+      function showGameOver() {
+        finalScoreElement.textContent = score;
+        gameOverOverlay.style.display = 'flex';
+        startButton.disabled = false;
       }
 
       function startGame() {
