@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      #game-container {
+        position: relative;
+        width: 70vw;
+        height: 70vh;
+        border: 1px solid black;
+      }
+
+      .square {
+        position: absolute;
+        width: 5%;
+        height: 5%;
+        font-size: 5vh;
+        text-align: center;
+      }
+
+      .astronaut {
+        background-color: transparent;
+      }
+
+      .alien {
+        background-color: transparent;
+      }
+
+      .rocket {
+        background-color: transparent;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="game-container">
+      <div id="astronaut" class="square">&#128104;</div>
+    </div>
+    <p>Score: <span id="score">0</span></p>
+    <button id="start-button">Start</button>
+
+    <script>
+      var gameContainer = document.getElementById('game-container');
+      var astronaut = document.getElementById('astronaut');
+      var scoreElement = document.getElementById('score');
+      var startButton = document.getElementById('start-button');
+
+      var score = 0;
+      var gameSpeed = 2;
+      var astronautSize = 5;
+      var containerWidth = gameContainer.offsetWidth;
+      var containerHeight = gameContainer.offsetHeight;
+
+      var leftArrowPressed = false;
+      var rightArrowPressed = false;
+
+      var alienInterval;
+      var rocketInterval;
+
+      astronaut.style.left = containerWidth / 2 - astronautSize / 2 + 'px';
+      astronaut.style.top = containerHeight - astronautSize + 'px';
+
+      function createSquare(className) {
+        var square = document.createElement('div');
+        square.className = className + ' square';
+        square.style.left =
+          Math.random() * (containerWidth - astronautSize) + 'px';
+        square.style.top = -astronautSize + 'px';
+
+        if (className === 'alien') {
+          square.innerHTML = '&#128125;';
+        } else if (className === 'rocket') {
+          square.innerHTML = '&#128640;';
+        }
+
+        gameContainer.appendChild(square);
+      }
+
+      function updateScore() {
+        score++;
+        scoreElement.textContent = score;
+      }
+
+      function collisionDetection() {
+        var aliens = document.getElementsByClassName('alien');
+        var rockets = document.getElementsByClassName('rocket');
+
+        for (var i = 0; i < aliens.length; i++) {
+          var alien = aliens[i];
+          var astronautRect = astronaut.getBoundingClientRect();
+          var alienRect = alien.getBoundingClientRect();
+
+          if (
+            astronautRect.left < alienRect.left + alienRect.width &&
+            astronautRect.left + astronautRect.width > alienRect.left &&
+            astronautRect.top < alienRect.top + alienRect.height &&
+            astronautRect.top + astronautRect.height > alienRect.top
+          ) {
+            clearInterval(alienInterval);
+            clearInterval(rocketInterval);
+            alert('Game Over! Score: ' + score);
+            resetGame();
+          }
+        }
+
+        for (var j = 0; j < rockets.length; j++) {
+          var rocket = rockets[j];
+          var astronautRect = astronaut.getBoundingClientRect();
+          var rocketRect = rocket.getBoundingClientRect();
+
+          if (
+            astronautRect.left < rocketRect.left + rocketRect.width &&
+            astronautRect.left + astronautRect.width > rocketRect.left &&
+            astronautRect.top < rocketRect.top + rocketRect.height &&
+            astronautRect.top + astronautRect.height > rocketRect.top
+          ) {
+            gameContainer.removeChild(rocket);
+            updateScore();
+          }
+        }
+      }
+
+      function updateGame() {
+        var aliens = document.getElementsByClassName('alien');
+        var rockets = document.getElementsByClassName('rocket');
+
+        for (var i = 0; i < aliens.length; i++) {
+          var alien = aliens[i];
+          var topPosition = alien.offsetTop + gameSpeed;
+          alien.style.top = topPosition + 'px';
+
+          if (topPosition > containerHeight) {
+            gameContainer.removeChild(alien);
+          }
+        }
+
+        for (var j = 0; j < rockets.length; j++) {
+          var rocket = rockets[j];
+          var topPosition = rocket.offsetTop + gameSpeed;
+          rocket.style.top = topPosition + 'px';
+
+          if (topPosition > containerHeight) {
+            gameContainer.removeChild(rocket);
+          }
+        }
+
+        collisionDetection();
+
+        if (leftArrowPressed) {
+          var leftPosition = astronaut.offsetLeft - 5;
+          if (leftPosition >= 0) {
+            astronaut.style.left = leftPosition + 'px';
+          }
+        }
+
+        if (rightArrowPressed) {
+          var rightPosition = astronaut.offsetLeft + 5;
+          if (rightPosition + astronautSize <= containerWidth) {
+            astronaut.style.left = rightPosition + 'px';
+          }
+        }
+
+        requestAnimationFrame(updateGame);
+      }
+
+      document.addEventListener('keydown', function (event) {
+        if (event.code === 'ArrowLeft') {
+          leftArrowPressed = true;
+        } else if (event.code === 'ArrowRight') {
+          rightArrowPressed = true;
+        }
+      });
+
+      document.addEventListener('keyup', function (event) {
+        if (event.code === 'ArrowLeft') {
+          leftArrowPressed = false;
+        } else if (event.code === 'ArrowRight') {
+          rightArrowPressed = false;
+        }
+      });
+
+      startButton.addEventListener('click', function () {
+        startButton.disabled = true;
+        resetGame();
+        startGame();
+      });
+
+      function resetGame() {
+        clearInterval(alienInterval);
+        clearInterval(rocketInterval);
+        var aliens = document.getElementsByClassName('alien');
+        var rockets = document.getElementsByClassName('rocket');
+
+        while (aliens.length > 0) {
+          gameContainer.removeChild(aliens[0]);
+        }
+
+        while (rockets.length > 0) {
+          gameContainer.removeChild(rockets[0]);
+        }
+
+        astronaut.style.left = containerWidth / 2 - astronautSize / 2 + 'px';
+        astronaut.style.top = containerHeight - astronautSize + 'px';
+
+        score = 0;
+        scoreElement.textContent = score;
+      }
+
+      function startGame() {
+        alienInterval = setInterval(function () {
+          createSquare('alien');
+        }, 1000);
+
+        rocketInterval = setInterval(function () {
+          createSquare('rocket');
+        }, 3000);
+
+        updateGame();
+      }
+    </script>
+  </body>
+</html>
