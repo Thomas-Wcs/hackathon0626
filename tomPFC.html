@@ -7,7 +7,7 @@
   </head>
   <body>
     <div class="conteneur-principale-jeu">
-      <h2>Bienvenu à PFC !</h2>
+      <h2>Pierre Feuille Ciseaux !</h2>
       <h4>
         Pierre Feuille Ciseaux est un jeu classique et amusant qui mettra à
         l'épreuve votre rapidité et votre capacité à anticiper les actions de
@@ -39,13 +39,12 @@
           Ciseaux
         </button>
       </div>
-
       <div class="result-annonce">Résultats :</div>
       <div class="conteneur-resultats-avatar">
         <img class="avatar-humain" src="./assets/images/humain2.png" alt="" />
-        <div class="joueur-annonce">Humain :</div>
+        <div class="joueur-annonce">Joueur</div>
         <img class="avatar-robot" src="./assets/images/robotsvg.png" alt="" />
-        <div class="robot-annonce">IA :</div>
+        <div class="robot-annonce">Robot</div>
       </div>
     </div>
 
@@ -73,7 +72,6 @@
             (joueur === 'Ciseaux' && robot === 'Feuille')
           ) {
             resultat = 'Le joueur a gagné';
-            console.log('toto');
             joueurScore++;
           } else if (joueur === robot) {
             resultat = 'Égalité';
@@ -84,16 +82,15 @@
           }
 
           const scoreMessage = `Scores : Joueur ${joueurScore} | Robot ${robotScore} | Égalité ${egaliteScore}`;
-          const resultMessage = `Le joueur a choisi : ${joueur}. L'IA a choisi ${robot}. Le résultat est : ${resultat} !`;
-          const humanScore = ` Joueur ${joueurScore}  `;
-          const robotDisplayScore = ` Robot ${robotScore}  `;
+          const resultMessage = `Joueur : ${joueur}. Robot : ${robot}. Résultat : ${resultat} !`;
+          const humanScore = ` Joueur : ${joueurScore}  `;
+          const robotDisplayScore = ` Robot : ${robotScore}  `;
 
           document.querySelector('.joueur-annonce').innerHTML = humanScore;
           document.querySelector('.robot-annonce').innerHTML =
             robotDisplayScore;
 
-          document.querySelector('.result-annonce').innerHTML =
-            scoreMessage + '<br/>' + resultMessage;
+          document.querySelector('.result-annonce').innerHTML = resultMessage;
         });
       }
     </script>

@@ -1,6 +1,5 @@
 body {
   color: aliceblue;
-  background-color: rgb(107, 107, 185);
   font-family: Arial, Helvetica, sans-serif;
   background-size: cover;
   background-position: center;
@@ -20,9 +19,6 @@ button {
 }
 button:active {
   transform: scale(1.1);
-}
-.result-annonce {
-  background-color: rgb(41, 137, 161);
 }
 .conteneur-principale-jeu {
   display: flex;
@@ -44,6 +40,17 @@ h4 {
 img {
   width: 100px;
   background-color: aliceblue;
+  margin-top: 15%;
+}
+.result-annonce {
+  font-size: 20px;
+  margin: 1%;
+}
+.robot-annonce {
+  font-size: 24px;
+}
+.joueur-annonce {
+  font-size: 24px;
 }
 
 @media screen and (max-width: 700px) {
