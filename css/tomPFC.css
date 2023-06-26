@@ -3,7 +3,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   background-size: cover;
   background-position: center;
-  background-image: url('./assets/images/mainBack.jpg');
+  background-image: url('../assets/images/mainBack.jpg');
 }
 button {
   color: transparent;
