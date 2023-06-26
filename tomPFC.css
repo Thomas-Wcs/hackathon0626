@@ -1,0 +1,62 @@
+body {
+  color: aliceblue;
+  font-family: Arial, Helvetica, sans-serif;
+  background-size: cover;
+  background-position: center;
+  background-image: url('./assets/images/mainBack.jpg');
+}
+button {
+  color: transparent;
+  background-size: cover;
+  background-position: center;
+  width: 200px;
+  height: 200px;
+  border: none;
+  outline: none;
+  border-radius: 30px;
+  margin: 1%;
+  transition: transform 0.2s;
+}
+button:active {
+  transform: scale(1.1);
+}
+.conteneur-principale-jeu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.conteneur-buttons {
+  display: flex;
+}
+h3 {
+  color: rgb(115, 255, 0);
+}
+h4 {
+  margin: 3%;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 30px;
+  padding: 1%;
+}
+img {
+  width: 100px;
+  background-color: aliceblue;
+  margin-top: 15%;
+}
+.result-annonce {
+  font-size: 20px;
+  margin: 1%;
+}
+.robot-annonce {
+  font-size: 24px;
+  padding: 10%;
+}
+.joueur-annonce {
+  font-size: 24px;
+  padding: 10%;
+}
+
+@media screen and (max-width: 700px) {
+  .conteneur-buttons {
+    flex-direction: column;
+  }
+}
