@@ -1,0 +1,101 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pierre Feuille Ciseaux</title>
+    <link rel="stylesheet" href="tomPFC.css" />
+  </head>
+  <body>
+    <div class="conteneur-principale-jeu">
+      <h2>Bienvenu à PFC !</h2>
+      <h4>
+        Pierre Feuille Ciseaux est un jeu classique et amusant qui mettra à
+        l'épreuve votre rapidité et votre capacité à anticiper les actions de
+        votre adversaire. <br /><br />Voici les règles de base : Deux joueurs
+        s'affrontent simultanément en choisissant l'une des trois options :
+        Pierre, Feuille ou Ciseaux.
+        <br />
+        <br />La Pierre bat les Ciseaux en les émoussant, les Ciseaux battent la
+        Feuille en la coupant, et la Feuille bat la Pierre en l'enveloppant. Si
+        les deux joueurs choisissent la même option, c'est un match nul et une
+        nouvelle manche est jouée. <br /><br />Les joueurs continuent à jouer
+        des manches jusqu'à ce qu'un joueur atteigne un nombre prédéfini de
+        victoires pour remporter la partie. <br /><br />Soyez stratégique et
+        essayez de deviner les choix de votre adversaire pour prendre l'avantage
+        et gagner le maximum de manches. <br /><br />Préparez-vous à mettre vos
+        réflexes et votre instinct à l'épreuve dans ce jeu palpitant où chaque
+        décision compte. <br /><br />
+        Que le meilleur joueur gagne !
+      </h4>
+      <h3>Cliquez sur une image pour jouer :</h3>
+      <div class="conteneur-buttons">
+        <button style="background-image: url('./assets/images/pierre.png')">
+          Pierre
+        </button>
+        <button style="background-image: url('./assets/images/feuille.png')">
+          Feuille
+        </button>
+        <button style="background-image: url('./assets/images/ciseaux.png')">
+          Ciseaux
+        </button>
+      </div>
+
+      <div class="result-annonce">Résultats :</div>
+      <div class="conteneur-resultats-avatar">
+        <img class="avatar-humain" src="./assets/images/humain2.png" alt="" />
+        <div class="joueur-annonce">Humain :</div>
+        <img class="avatar-robot" src="./assets/images/robotsvg.png" alt="" />
+        <div class="robot-annonce">IA :</div>
+      </div>
+    </div>
+
+    <script>
+      let joueurScore = 0;
+      let robotScore = 0;
+      let egaliteScore = 0;
+
+      const buttons = document.querySelectorAll('button');
+
+      for (let i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener('click', function () {
+          const joueur = buttons[i].innerHTML.trim();
+          const robot =
+            buttons[
+              Math.floor(Math.random() * buttons.length)
+            ].innerHTML.trim();
+          console.log(` "${joueur}","${robot}" `);
+
+          let resultat = '';
+
+          if (
+            (joueur === 'Pierre' && robot === 'Ciseaux') ||
+            (joueur === 'Feuille' && robot === 'Pierre') ||
+            (joueur === 'Ciseaux' && robot === 'Feuille')
+          ) {
+            resultat = 'Le joueur a gagné';
+            console.log('toto');
+            joueurScore++;
+          } else if (joueur === robot) {
+            resultat = 'Égalité';
+            egaliteScore++;
+          } else {
+            resultat = 'Le joueur a perdu';
+            robotScore++;
+          }
+
+          const scoreMessage = `Scores : Joueur ${joueurScore} | Robot ${robotScore} | Égalité ${egaliteScore}`;
+          const resultMessage = `Le joueur a choisi : ${joueur}. L'IA a choisi ${robot}. Le résultat est : ${resultat} !`;
+          const humanScore = ` Joueur ${joueurScore}  `;
+          const robotDisplayScore = ` Robot ${robotScore}  `;
+
+          document.querySelector('.joueur-annonce').innerHTML = humanScore;
+          document.querySelector('.robot-annonce').innerHTML =
+            robotDisplayScore;
+
+          document.querySelector('.result-annonce').innerHTML =
+            scoreMessage + '<br/>' + resultMessage;
+        });
+      }
+    </script>
+  </body>
+</html>
