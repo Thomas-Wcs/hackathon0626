@@ -44,7 +44,7 @@ body {
 #score {
   font-size: 28px;
   background-color: transparent;
-  color: #fff8f8;
+  color: #46ff17;
 }
 #start-button {
   transition: transform 0.2s;
@@ -55,7 +55,7 @@ body {
 .score-paragraphe {
   font-size: 28px;
   background-color: transparent;
-  color: #fff8f8;
+  color: #46ff17;
 }
 .score-and-start {
   display: block;
