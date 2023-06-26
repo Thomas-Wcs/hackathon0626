@@ -13,6 +13,7 @@ var config = {
     preload: preload,
     create: create,
     update: update,
+    createPeta: createPeta, // Ajoutez cette ligne
   },
 };
 
@@ -56,7 +57,7 @@ function preload() {
 }
 
 function create() {
-  player = this.physics.add.sprite(500, 650, 'hunter');
+  player = this.physics.add.sprite(500, 600, 'hunter');
   player.setImmovable(true);
   player.setScale(1 / 4.6);
 
@@ -225,12 +226,11 @@ function update(time) {
   }
 
   if (petaCount % 3 === 0 && petaCount > 0 && !peta) {
-    createPeta();
+    createPeta.call(this);
   }
 }
 
 function hitPetacall(bullet, creature) {
-  console.log('toto');
   bullet.setActive(false);
   bullet.setVisible(false);
   creature.disableBody(true, true);
@@ -276,7 +276,7 @@ function hitCreature(atome, creature) {
 }
 
 function createPeta() {
-  peta = creatures.create(
+  peta = this.physics.add.image(
     Phaser.Math.Between(50, 1150),
     Phaser.Math.Between(-300, -100),
     'peta'
