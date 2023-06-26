@@ -15,7 +15,8 @@
     </div>
     <div class="score-and-start">
       <button id="start-button">Start</button>
-      <p class="score-paragraphe">Score: <span id="score">0</span></p>
+      <p class="score-paragraphe"></p>
+      <span id="score">0</span>
     </div>
     <audio id="clickCardSound">
       <source src="../assets/videos/chek1.mp3" type="audio/mpeg" />
@@ -25,6 +26,7 @@
     </audio>
 
     <script>
+      let playerNameStorage = localStorage.getItem('player');
       var gameContainer = document.getElementById('game-container');
       var astronaut = document.getElementById('astronaut');
       var scoreElement = document.getElementById('score');
@@ -51,6 +53,9 @@
 
       const playButton = document.getElementById('playButton');
       const clickSound = document.getElementById('clickSound');
+
+      const playerNameDisplay = ` Score de ${playerNameStorage}: `;
+      document.querySelector('.score-paragraphe').innerHTML = playerNameDisplay;
 
       let isPlaying = true;
 

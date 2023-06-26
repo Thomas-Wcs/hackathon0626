@@ -16,5 +16,32 @@
       <a href="tomPFC.html">PFC ! </a>
       <a href="./AstroGame/Astro.html">Astro </a>
     </div>
+    <script>
+      let player = localStorage.getItem('player');
+      console.log(player);
+
+      if (player) {
+        player = JSON.parse(player);
+      } else {
+        player = '';
+      }
+
+      const playerForm = document.getElementById('playerForm');
+
+      playerForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const playerNameInput = document.getElementById('playerName');
+        const playerName = playerNameInput.value;
+
+        player = playerName;
+
+        localStorage.setItem('player', JSON.stringify(player));
+
+        console.log('Nom du joueur :', player);
+
+        playerNameInput.value = '';
+      });
+    </script>
   </body>
 </html>
