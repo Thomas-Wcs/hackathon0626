@@ -67,3 +67,12 @@ body {
   border-radius: 30px;
   width: 100px;
 }
+#playButton {
+  width: 5px;
+  height: 5px;
+  border-radius: 20px;
+  padding: 20px;
+  background-image: url('../assets/images/sonNon.png');
+  background-size: cover;
+  background-color: aliceblue;
+}
