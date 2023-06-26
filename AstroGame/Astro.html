@@ -9,13 +9,20 @@
         <img src="../assets/images/unnamed.png" alt="" />
       </a>
     </div>
+    <div id="playButton"></div>
     <div id="game-container">
-      <div id="astronaut" class="square">&#128104;</div>
+      <div id="astronaut" class="square">&#129302;</div>
     </div>
     <div class="score-and-start">
       <button id="start-button">Start</button>
       <p class="score-paragraphe">Score: <span id="score">0</span></p>
     </div>
+    <audio id="clickCardSound">
+      <source src="../assets/videos/chek1.mp3" type="audio/mpeg" />
+    </audio>
+    <audio id="clickSound" autoplay loop>
+      <source src="../assets/videos/astroSon.mp3" type="audio/mpeg" />
+    </audio>
 
     <script>
       var gameContainer = document.getElementById('game-container');
@@ -34,9 +41,31 @@
 
       var alienInterval;
       var rocketInterval;
+      var clickSoundCart = document.getElementById('clickCardSound');
+      var playSound = function () {
+        clickSoundCart.play();
+      };
 
       astronaut.style.left = containerWidth / 2 - astronautSize / 2 + 'px';
       astronaut.style.top = containerHeight - astronautSize + 'px';
+
+      const playButton = document.getElementById('playButton');
+      const clickSound = document.getElementById('clickSound');
+
+      let isPlaying = true;
+
+      playButton.addEventListener('click', function () {
+        if (isPlaying) {
+          clickSound.pause();
+          isPlaying = false;
+          playButton.style.backgroundImage = "url('../assets/images/son2.png')";
+        } else {
+          clickSound.play();
+          isPlaying = true;
+          playButton.style.backgroundImage =
+            "url('../assets/images/sonNon.png')";
+        }
+      });
 
       function createSquare(className) {
         var square = document.createElement('div');
@@ -93,6 +122,8 @@
             astronautRect.top + astronautRect.height > rocketRect.top
           ) {
             gameContainer.removeChild(rocket);
+            console.log('titi');
+            playSound();
             updateScore();
           }
         }

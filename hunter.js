@@ -57,7 +57,11 @@ function preload() {
 }
 
 function create() {
-  player = this.physics.add.sprite(500, 600, 'hunter');
+  player = this.physics.add.sprite(
+    window.innerWidth * 0.5,
+    window.innerHeight * 0.77,
+    'hunter'
+  );
   player.setImmovable(true);
   player.setScale(1 / 4.6);
 

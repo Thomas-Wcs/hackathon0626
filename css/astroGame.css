@@ -44,7 +44,7 @@ body {
 #score {
   font-size: 28px;
   background-color: transparent;
-  color: #fff8f8;
+  color: #46ff17;
 }
 #start-button {
   transition: transform 0.2s;
@@ -55,7 +55,7 @@ body {
 .score-paragraphe {
   font-size: 28px;
   background-color: transparent;
-  color: #fff8f8;
+  color: #46ff17;
 }
 .score-and-start {
   display: block;
@@ -66,4 +66,13 @@ body {
 .image-clickable-home img {
   border-radius: 30px;
   width: 100px;
+}
+#playButton {
+  width: 5px;
+  height: 5px;
+  border-radius: 20px;
+  padding: 20px;
+  background-image: url('../assets/images/sonNon.png');
+  background-size: cover;
+  background-color: aliceblue;
 }

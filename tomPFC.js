@@ -38,4 +38,34 @@ for (let i = 0; i < buttons.length; i++) {
 
     document.querySelector('.result-annonce').innerHTML = resultMessage;
   });
+
+  //Gestion du son ==>
+
+  const cardClickButtons = document.querySelectorAll(
+    '.conteneur-buttons button'
+  );
+  const clickSoundCart = document.getElementById('clickCardSound');
+
+  cardClickButtons.forEach(function (button) {
+    button.addEventListener('click', function () {
+      clickSoundCart.play();
+    });
+  });
+
+  const playButton = document.getElementById('playButton');
+  const clickSound = document.getElementById('clickSound');
+
+  let isPlaying = false;
+
+  playButton.addEventListener('click', function () {
+    if (isPlaying) {
+      clickSound.pause();
+      isPlaying = false;
+      playButton.style.backgroundImage = "url('./assets/images/son2.png')";
+    } else {
+      clickSound.play();
+      isPlaying = true;
+      playButton.style.backgroundImage = "url('./assets/images/sonNon.png')";
+    }
+  });
 }
