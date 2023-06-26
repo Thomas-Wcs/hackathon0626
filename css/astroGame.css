@@ -1,0 +1,62 @@
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url('../assets/images/galaxie.jpg');
+  background-size: cover;
+}
+
+#game-container {
+  position: relative;
+  width: 85vw;
+  height: 85vh;
+}
+
+.square {
+  position: absolute;
+  width: 5%;
+  height: 5%;
+  font-size: 5vh;
+  text-align: center;
+}
+
+.astronaut {
+  background-color: transparent;
+}
+
+.alien {
+  background-color: transparent;
+}
+
+.rocket {
+  background-color: transparent;
+}
+#start-button {
+  font-size: 34px;
+  background-color: transparent;
+  color: #fff8f8;
+  border: none;
+  outline: none;
+}
+#score {
+  font-size: 28px;
+  background-color: transparent;
+  color: #fff8f8;
+}
+#start-button {
+  transition: transform 0.2s;
+}
+#start-button:active {
+  transform: scale(1.5);
+}
+.score-paragraphe {
+  font-size: 28px;
+  background-color: transparent;
+  color: #fff8f8;
+}
+.score-and-start {
+  display: block;
+}

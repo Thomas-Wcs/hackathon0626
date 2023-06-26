@@ -46,17 +46,33 @@ img {
   font-size: 20px;
   margin: 1%;
 }
+.conteneur-resultats-avatar {
+  display: flex;
+}
 .robot-annonce {
   font-size: 24px;
-  padding: 10%;
+  padding-top: 25%;
+  padding-left: 10%;
+  padding-right: 20%;
 }
 .joueur-annonce {
   font-size: 24px;
-  padding: 10%;
+  padding-top: 25%;
+  padding-left: 10%;
+  padding-right: 20%;
+}
+.image-clickable-home {
+  margin: 2%;
+}
+.image-clickable-home img {
+  border-radius: 30px;
 }
 
 @media screen and (max-width: 700px) {
   .conteneur-buttons {
     flex-direction: column;
+  }
+  .conteneur-resultats-avatar {
+    display: block;
   }
 }

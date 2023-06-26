@@ -1,50 +1,21 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-      }
-
-      #game-container {
-        position: relative;
-        width: 70vw;
-        height: 70vh;
-        border: 1px solid black;
-      }
-
-      .square {
-        position: absolute;
-        width: 5%;
-        height: 5%;
-        font-size: 5vh;
-        text-align: center;
-      }
-
-      .astronaut {
-        background-color: transparent;
-      }
-
-      .alien {
-        background-color: transparent;
-      }
-
-      .rocket {
-        background-color: transparent;
-      }
-    </style>
+    <link rel="stylesheet" href="../css/astroGame.css" />
   </head>
   <body>
+    <div class="image-clickable-home">
+      <a href="index.html">
+        <img src="./assets/images/unnamed.png" alt="" />
+      </a>
+    </div>
     <div id="game-container">
       <div id="astronaut" class="square">&#128104;</div>
     </div>
-    <p>Score: <span id="score">0</span></p>
-    <button id="start-button">Start</button>
+    <div class="score-and-start">
+      <p class="score-paragraphe">Score: <span id="score">0</span></p>
+      <button id="start-button">Start</button>
+    </div>
 
     <script>
       var gameContainer = document.getElementById('game-container');
