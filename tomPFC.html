@@ -59,45 +59,13 @@
       </div>
     </div>
 
-    <audio id="clickSound" autoplay loop>
+    <audio id="clickSound" loop>
       <source src="./assets/videos/chil1.mp3" type="audio/mpeg" />
     </audio>
     <audio id="clickCardSound">
       <source src="./assets/videos/carte1.mp3" type="audio/mpeg" />
     </audio>
 
-    <script>
-      const cardClickButtons = document.querySelectorAll(
-        '.conteneur-buttons button'
-      );
-      const clickSoundCart = document.getElementById('clickCardSound');
-
-      cardClickButtons.forEach(function (button) {
-        button.addEventListener('click', function () {
-          clickSoundCart.play();
-        });
-      });
-    </script>
-
-    <script>
-      const playButton = document.getElementById('playButton');
-      const clickSound = document.getElementById('clickSound');
-
-      let isPlaying = false;
-
-      playButton.addEventListener('click', function () {
-        if (isPlaying) {
-          clickSound.pause();
-          isPlaying = false;
-          playButton.style.backgroundImage = "url('./assets/images/son2.png')";
-        } else {
-          clickSound.play();
-          isPlaying = true;
-          playButton.style.backgroundImage =
-            "url('./assets/images/sonNon.png')";
-        }
-      });
-    </script>
     <script src="tomPFC.js"></script>
   </body>
 </html>
