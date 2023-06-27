@@ -37,7 +37,7 @@ var petaCount = 0;
 var atomes;
 var atomesText;
 var isAtomeReady = true;
-var atomeCooldown = 10000;
+var atomeCooldown = 30000;
 var atomeCount = 0;
 var isAtomeActive = false;
 
@@ -210,10 +210,10 @@ function update(time) {
   if (time > nextPoopTime) {
     let creature = Phaser.Utils.Array.GetRandom(creatures.getChildren());
     if (creature) {
-      let newPoop = poops.create(creature.x, creature.y, 'poop');
+      let newPoop = poops.create(creature.x, 0, 'poop');
       newPoop.setScale(0.1);
       newPoop.setVelocityY(100);
-      nextPoopTime = time + 12000;
+      nextPoopTime = time + 5000;
     }
   }
 
@@ -264,8 +264,6 @@ function hitCreatureBullet(bullet, creature) {
 
 function hitPlayerCreature(player, creature) {
   creature.disableBody(true, true);
-  score += 50;
-  scoreText.setText('Score: ' + score);
   health -= 50;
   healthText.setText('Health: ' + health);
 }
