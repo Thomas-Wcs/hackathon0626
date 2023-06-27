@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Codystar:300&display=swap');
+
 body {
   margin: 0;
   padding: 0;
@@ -13,18 +15,40 @@ body {
 
 h1 {
   text-align: center;
-  margin-top: 100px;
+  margin-top: 50px;
   color: white;
   font-weight: bold;
-  font-size: 60px;
-  font-family: 'Arial', sans-serif;
+  font-size: 80px;
+  font-family: 'Codystar';
   text-align: center;
   text-transform: uppercase;
+  text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff,
+    0 0 40px #ff00ff, 0 0 50px #ff00ff, 0 0 60px #ff00ff, 0 0 70px #ff00ff;
 }
 
-h1 {
-  color: white;
+.neons h1 {
+  font-size: 9rem;
+  text-align: center;
   font-weight: bold;
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    color: #fff;
+    text-shadow: 0 0 10px #00fff2, 0 0 20px #00fff2, 0 0 30px #00fff2,
+      0 0 40px #00fff2, 0 0 50px #00fff2, 0 0 60px #00fff2, 0 0 70px #00fff2,
+      0 0 90px #00fff2;
+    opacity: 0.5;
+  }
+
+  to {
+    color: gray;
+    text-shadow: 0 0 20px #00fff2, 0 0 30px #00fff2, 0 0 40px #00fff2,
+      0 0 50px #00fff2, 0 0 60px #00fff2, 0 0 70px #00fff2, 0 0 80px #00fff2,
+      0 1 90px #00fff2;
+    opacity: 0.5;
+  }
 }
 
 .game-pack-container {
@@ -35,6 +59,18 @@ a {
   justify-content: space-between;
   margin-bottom: 10px;
   padding: 100px;
+}
+a::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  z-index: -1;
+  background: linear-gradient(45deg, #ff00ff, #00fff2);
+  filter: blur(8px);
+  border-radius: 30px;
 }
 
 #playerForm {
@@ -47,7 +83,7 @@ a {
 #playerForm label {
   color: #fff;
   font-size: 20px;
-  margin-bottom: 10px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 #playerName {
@@ -57,7 +93,7 @@ a {
   border-bottom: 2px solid #fff;
   color: #fff;
   font-size: 18px;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   outline: none;
   transition: border-bottom-color 0.3s ease;
 }
@@ -79,27 +115,7 @@ a {
 #playerForm button:hover {
   background-color: #b25aff;
 }
-/*
-#playerForm {
-  display: flex;
-  justify-content: center;
-}
 
-#playerForm label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 8px;
-}
-*/
-
-/*
-.neon-link {
-  display: inline-block;
-  position: relative;
-  text-decoration: none;
-  color: #fff;
-}
-*/
 .neon-link::before,
 .neon-link::after {
   content: attr(data-text);
@@ -117,23 +133,26 @@ a {
 
 @keyframes neon-glow {
   0% {
-    filter: blur(2px);
-    opacity: 0.5;
+    filter: blur(5px);
+    opacity: 0.8;
   }
   100% {
     filter: blur(8px);
-    opacity: 1;
+    opacity: 5;
   }
 }
 
 .neon-link {
   display: inline-block;
   margin: 10px;
-  padding: 10px;
   color: #fff;
   text-decoration: none;
   position: relative;
   font-size: 24px;
+  padding: 50px;
+  text-align: center;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .neon-link::before,
@@ -146,9 +165,256 @@ a {
   overflow: hidden;
   white-space: nowrap;
   color: #8affa7;
+  font-size: 25px;
 }
 
 .img {
   width: 10px;
   height: 10px;
+  align-items: center;
+}
+
+/*
+@media screen and (max-width: 768px) {
+  @import url('https://fonts.googleapis.com/css?family=Codystar:300&display=swap');
+
+  body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100vh;
+    background-image: url('../assets/images/homepage.jpg');
+    background-size: cover;
+  }
+
+  h1 {
+    text-align: center;
+    margin-top: 30px;
+    color: white;
+    font-weight: bold;
+    font-size: 40px;
+    font-family: 'Codystar';
+    text-transform: uppercase;
+    text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 15px #ff00ff,
+      0 0 20px #ff00ff, 0 0 25px #ff00ff, 0 0 30px #ff00ff, 0 0 35px #ff00ff;
+  }
+
+  .neons h1 {
+    font-size: 6rem;
+    text-align: center;
+    font-weight: bold;
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes glow {
+    from {
+      color: #fff;
+      text-shadow: 0 0 5px #00fff2, 0 0 10px #00fff2, 0 0 15px #00fff2,
+        0 0 20px #00fff2, 0 0 25px #00fff2, 0 0 30px #00fff2, 0 0 35px #00fff2,
+        0 0 45px #00fff2;
+      opacity: 0.5;
+    }
+
+    to {
+      color: gray;
+      text-shadow: 0 0 10px #00fff2, 0 0 15px #00fff2, 0 0 20px #00fff2,
+        0 0 25px #00fff2, 0 0 30px #00fff2, 0 0 35px #00fff2, 0 0 40px #00fff2,
+        0 1 45px #00fff2;
+      opacity: 0.5;
+    }
+  }
+
+  .game-pack-container {
+    margin-top: auto;
+  }
+
+  a {
+    justify-content: space-between;
+    margin-bottom: 5px;
+    padding: 50px;
+  }
+
+  #playerForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  #playerForm label {
+    color: #fff;
+    font-size: 14px;
+  }
+
+  #playerName {
+    padding: 5px;
+    border: none;
+    background-color: transparent;
+    border-bottom: 1px solid #fff;
+    color: #fff;
+    font-size: 12px;
+    margin-bottom: 15px;
+    outline: none;
+    transition: border-bottom-color 0.3s ease;
+  }
+
+  #playerName:focus {
+    border-bottom-color: #9e70b6;
+  }
+
+  #playerForm button {
+    padding: 5px 10px;
+    border: none;
+    background-color: #8affa7;
+    color: #000;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  #playerForm button:hover {
+    background-color: #b25aff;
+  }
+
+  .neon-link {
+    display: inline-block;
+    margin: 5px;
+    color: #fff;
+    text-decoration: none;
+    position: relative;
+    font-size: 16px;
+    padding: 25px;
+    text-align: center;
+  }
+
+  .neon-link::before,
+  .neon-link::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    color: #8affa7;
+  }
+
+  .img {
+    width: 5px;
+    height: 5px;
+    align-items: center;
+  }
+}
+*/
+
+@media screen and (max-width: 768px) {
+  @import url('https://fonts.googleapis.com/css?family=Codystar:300&display=swap');
+
+  body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100vh;
+    background-image: url('../assets/images/homepage.jpg');
+    background-size: cover;
+  }
+
+  h1 {
+    text-align: center;
+    margin-top: 30px;
+    color: white;
+    font-weight: bold;
+    font-size: 40px;
+    font-family: 'Codystar';
+    text-transform: uppercase;
+    text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 15px #ff00ff,
+      0 0 20px #ff00ff, 0 0 25px #ff00ff, 0 0 30px #ff00ff, 0 0 35px #ff00ff;
+  }
+
+  .neons h1 {
+    font-size: 6rem;
+    text-align: center;
+    font-weight: bold;
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes glow {
+    from {
+      color: #fff;
+      text-shadow: 0 0 5px #00fff2, 0 0 10px #00fff2, 0 0 15px #00fff2,
+        0 0 20px #00fff2, 0 0 25px #00fff2, 0 0 30px #00fff2, 0 0 35px #00fff2,
+        0 0 45px #00fff2;
+      opacity: 0.5;
+    }
+
+    to {
+      color: gray;
+      text-shadow: 0 0 10px #00fff2, 0 0 15px #00fff2, 0 0 20px #00fff2,
+        0 0 25px #00fff2, 0 0 30px #00fff2, 0 0 35px #00fff2, 0 0 40px #00fff2,
+        0 1 45px #00fff2;
+      opacity: 0.5;
+    }
+  }
+
+  .game-pack-container {
+    margin-top: auto;
+  }
+
+  a {
+    justify-content: space-between;
+    margin-bottom: 5px;
+    padding: 50px;
+    position: relative;
+    z-index: 1;
+  }
+
+  a::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    z-index: -1;
+    background: linear-gradient(45deg, #ff00ff, #00fff2);
+    filter: blur(8px);
+    border-radius: 30px;
+  }
+
+  .neon-link {
+    display: inline-block;
+    margin: 5px;
+    color: #fff;
+    text-decoration: none;
+    position: relative;
+    font-size: 16px;
+    padding: 25px;
+    text-align: center;
+    border-radius: 30px;
+  }
+
+  .neon-link::before,
+  .neon-link::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    color: #8affa7;
+    margin: -7px;
+  }
+
+  .img {
+    width: 5px;
+    height: 5px;
+    align-items: center;
+  }
 }
