@@ -63,8 +63,7 @@ body {
   padding: 10px;
   font-weight: bold;
 }
-
-.game-over-overlay {
+*/ .game-over-overlay {
   display: none;
   position: absolute;
   top: 0;
