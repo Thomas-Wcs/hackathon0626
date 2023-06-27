@@ -55,9 +55,15 @@ function preload() {
   this.load.image('poop', 'hunterAssets/caca.gif');
   this.load.image('peta', 'hunterAssets/peta.jpg');
   this.load.image('atome', 'hunterAssets/atomeGif.gif');
+  this.load.image('background', 'hunterAssets/foret.jpg');
+  this.load.on('filecomplete-image-background', function () {
+    console.log('Image de fond chargée avec succès');
+  });
 }
 
 function create() {
+  this.add.image(0, 0, 'background').setOrigin(0);
+
   player = this.physics.add.sprite(
     window.innerWidth * 0.5,
     window.innerHeight * 0.77,
@@ -247,8 +253,6 @@ function update(time) {
 }
 
 function hitCreatureBullet(bullet, creature) {
-  console.log('tuc');
-
   bullet.destroy();
   creature.setActive(false);
   creature.setVisible(false);
