@@ -57,7 +57,13 @@ function preload() {
 }
 
 function create() {
-  player = this.physics.add.sprite(500, 600, 'hunter');
+  player = this.physics.add.sprite(
+    window.innerWidth * 0.5,
+    window.innerHeight * 0.75,
+    'hunter'
+  );
+  player.setBounce(0); // désactive l'élasticité du joueur
+
   player.setImmovable(true);
   player.setScale(1 / 4.6);
 
@@ -224,8 +230,7 @@ function update(time) {
       nextPoopTime = time + 12000;
     }
   }
-
-  if (petaCount % 3 === 0 && petaCount > 0 && !peta) {
+  if (petaCount % 3 == 0 && petaCount > 0 && !peta) {
     createPeta.call(this);
   }
 }
@@ -233,16 +238,22 @@ function update(time) {
 function hitPetacall(bullet, creature) {
   bullet.setActive(false);
   bullet.setVisible(false);
-  creature.disableBody(true, true);
   score += 10;
   scoreText.setText('Score: ' + score);
   petaCount++;
 }
 
-function hitPlayer(player, creature) {
-  creature.disableBody(true, true);
+function hitPlayer(player, obj) {
+  obj.disableBody(true, true);
   lives -= 1;
   livesText.setText('Lives: ' + lives);
+
+  if (obj.texture.key === 'peta') {
+    peta = null;
+    // Réinitialisez la position du joueur ici
+    player.setPosition(window.innerWidth * 0.5, window.innerHeight * 0.75);
+    player.setVelocity(0, 0); // Empêche le joueur de bouger
+  }
 }
 
 function hitPoop(player, poop) {
@@ -257,16 +268,11 @@ function hitPoop(player, poop) {
   }
 }
 
-function hitPeta(atome, peta) {
+function hitPeta(player, peta) {
   peta.disableBody(true, true);
   score += 10;
   scoreText.setText('Score: ' + score);
-}
-
-function hitPlayer(atome, player) {
-  player.disableBody(true, true);
-  score += 10;
-  scoreText.setText('Score: ' + score);
+  peta = null;
 }
 
 function hitCreature(atome, creature) {
@@ -281,10 +287,11 @@ function createPeta() {
     Phaser.Math.Between(-300, -100),
     'peta'
   );
+  peta.setBounce(0);
+  peta.setVelocity(0, 0);
   peta.setScale(0.5).setGravityY(100);
   peta.setImmovable(true);
-  this.physics.add.collider(peta, player, hitPlayer, null, this);
-  this.physics.add.collider(peta, atomes, hitPeta, null, this);
+  console.log('sss');
 }
 
 var Bullet = new Phaser.Class({
