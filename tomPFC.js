@@ -1,10 +1,10 @@
 let joueurScore = 0;
 let robotScore = 0;
 let egaliteScore = 0;
-let playerNameStorage = localStorage.getItem('player');
-let playerScoreStorage = localStorage.getItem('scoreList');
+let playerNameStorage = JSON.parse(localStorage.getItem('player'));
+let playerScoreStorage = JSON.parse(localStorage.getItem('scoreList'));
 let endGame = false;
-console.log(playerScoreStorage);
+console.log(playerScoreStorage, playerNameStorage);
 
 const buttons = document.querySelectorAll('button');
 
@@ -51,15 +51,18 @@ const handleClick = (i) => {
 
   if (joueurScore === 5 || robotScore === 5) {
     endGame = true;
-    let endGameMessage = `Le jeu est terminé ! Joueur : ${joueurScore} Robot : ${robotScore}`;
 
     const countdownInterval = setInterval(() => {
       countdown--;
-      endGameMessage = ` Joueur : <span style="color: yellow">${joueurScore}</span> Robot : <span style="color: blue">${robotScore}</span> </br> Restart dans : <span style="color: red">${countdown}</span> seconde(s)!  `;
+      endGameMessage = ` Le jeu est términé ! Joueur : <span style="color: yellow">${joueurScore}</span> Robot : <span style="color: blue">${robotScore}</span> </br> Restart dans : <span style="color: red">${countdown}</span> seconde(s)!  `;
       document.querySelector('.result-annonce').innerHTML = endGameMessage;
       if (countdown === 0) {
+        const toto = playerScoreStorage.find(
+          (item) => item.name === playerNameStorage
+        );
+        toto.score += joueurScore;
         clearInterval(countdownInterval);
-        rejouer();
+        // rejouer();
       }
     }, 1000);
   }
