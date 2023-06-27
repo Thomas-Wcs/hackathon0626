@@ -23,41 +23,6 @@
         <img src="./assets/images/game-console.png" alt="" />
       </a>
     </div>
-    <script>
-      let scoreList = localStorage.getItem('scoreList');
-      let playerNameOnly = localStorage.getItem('player');
-
-      console.log(playerNameOnly);
-      console.log(scoreList);
-
-      if (scoreList) {
-        scoreList = JSON.parse(scoreList);
-      } else {
-        scoreList = [];
-      }
-
-      const playerForm = document.getElementById('playerForm');
-
-      playerForm.addEventListener('submit', function (event) {
-        event.preventDefault();
-
-        const playerNameInput = document.getElementById('playerName');
-        const playerName = playerNameInput.value;
-
-        const score = Number;
-
-        const playerScore = {
-          name: playerName,
-          score: score,
-        };
-
-        scoreList.push(playerScore);
-
-        localStorage.setItem('scoreList', JSON.stringify(scoreList));
-        localStorage.setItem('player', JSON.stringify(playerName));
-
-        playerNameInput.value = '';
-      });
-    </script>
+    <script src="scoreName.js"></script>
   </body>
 </html>
