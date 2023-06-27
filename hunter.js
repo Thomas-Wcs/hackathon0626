@@ -40,8 +40,9 @@ var isAtomeReady = true;
 var atomeCooldown = 30000;
 var atomeCount = 0;
 var isAtomeActive = false;
-
 var game = new Phaser.Game(config);
+
+let playerNameStorage = localStorage.getItem('player');
 
 game.events.on('error', function (error) {
   console.error(error);
@@ -59,11 +60,9 @@ function preload() {
 function create() {
   player = this.physics.add.sprite(
     window.innerWidth * 0.5,
-    window.innerHeight * 0.75,
+    window.innerHeight * 0.77,
     'hunter'
   );
-  player.setBounce(0); // désactive l'élasticité du joueur
-
   player.setImmovable(true);
   player.setScale(1 / 4.6);
 

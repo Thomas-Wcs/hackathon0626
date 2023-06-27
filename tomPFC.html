@@ -4,6 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pierre Feuille Ciseaux</title>
     <link rel="stylesheet" href="./css/tomPFC.css" />
+    <link rel="icon" href="./assets/images/arcade-game.png" type="image/x-icon" />
   </head>
   <body>
     <div class="conteneur-principale-jeu">
@@ -12,6 +13,7 @@
           <img src="./assets/images/unnamed.png" alt="" />
         </a>
       </div>
+      <div id="playButton"></div>
       <h2>Pierre Feuille Ciseaux !</h2>
       <h4>
         Pierre Feuille Ciseaux est un jeu classique et amusant qui mettra à
@@ -32,6 +34,7 @@
         décision compte. <br /><br />
         Que le meilleur joueur gagne !
       </h4>
+      <h3 class="name-player-and-score" > </h3>
       <h3>Cliquez sur une image pour jouer :</h3>
       <div class="conteneur-buttons">
         <button style="background-image: url('./assets/images/pierre.png')">
@@ -51,13 +54,14 @@
         <img class="avatar-robot" src="./assets/images/robotsvg.png" alt="" />
         <div class="robot-annonce">Robot</div>
       </div>
-      <div class="image-clickable-home">
-        <a href="index.html">
-          <img src="./assets/images/unnamed.png" alt="" />
-        </a>
-      </div>
-    </div>
+    <audio id="clickSound" loop>
+      <source src="./assets/videos/chil1.mp3" type="audio/mpeg" />
+    </audio>
+    <audio id="clickCardSound">
+      <source src="./assets/videos/carte1.mp3" type="audio/mpeg" />
+    </audio>
 
     <script src="tomPFC.js"></script>
+    <!-- <script src="scoreName.js"></script> -->
   </body>
 </html>

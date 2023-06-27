@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>Astro Escape</title>
     <link rel="stylesheet" href="../css/astroGame.css" />
+    <link
+      rel="icon"
+      href="../assets/images/arcade-game.png"
+      type="image/x-icon"
+    />
   </head>
   <body>
     <div class="image-clickable-home">
@@ -9,19 +15,36 @@
         <img src="../assets/images/unnamed.png" alt="" />
       </a>
     </div>
+    <div id="playButton"></div>
     <div id="game-container">
-      <div id="astronaut" class="square">&#128104;</div>
+      <div id="astronaut" class="square">&#129302;</div>
     </div>
     <div class="score-and-start">
       <button id="start-button">Start</button>
-      <p class="score-paragraphe">Score: <span id="score">0</span></p>
+      <p class="score-paragraphe"></p>
+      <span id="score">0</span>
+    </div>
+    <audio id="clickCardSound">
+      <source src="../assets/videos/chek1.mp3" type="audio/mpeg" />
+    </audio>
+    <audio id="clickSound" autoplay loop>
+      <source src="../assets/videos/astroSon.mp3" type="audio/mpeg" />
+    </audio>
+
+    <div class="game-over-overlay" id="game-over-overlay">
+      <h1>Game Over! Score: <span id="final-score">0</span></h1>
+      <button id="start-again-button">Start Again</button>
     </div>
 
     <script>
+      let playerNameStorage = localStorage.getItem('player');
       var gameContainer = document.getElementById('game-container');
       var astronaut = document.getElementById('astronaut');
       var scoreElement = document.getElementById('score');
       var startButton = document.getElementById('start-button');
+      var startAgainButton = document.getElementById('start-again-button');
+      var gameOverOverlay = document.getElementById('game-over-overlay');
+      var finalScoreElement = document.getElementById('final-score');
 
       var score = 0;
       var gameSpeed = 2;
@@ -34,9 +57,34 @@
 
       var alienInterval;
       var rocketInterval;
+      var clickSoundCart = document.getElementById('clickCardSound');
+      var playSound = function () {
+        clickSoundCart.play();
+      };
 
       astronaut.style.left = containerWidth / 2 - astronautSize / 2 + 'px';
       astronaut.style.top = containerHeight - astronautSize + 'px';
+
+      const playButton = document.getElementById('playButton');
+      const clickSound = document.getElementById('clickSound');
+
+      const playerNameDisplay = ` Score de ${playerNameStorage}: `;
+      document.querySelector('.score-paragraphe').innerHTML = playerNameDisplay;
+
+      let isPlaying = true;
+
+      playButton.addEventListener('click', function () {
+        if (isPlaying) {
+          clickSound.pause();
+          isPlaying = false;
+          playButton.style.backgroundImage = "url('../assets/images/son2.png')";
+        } else {
+          clickSound.play();
+          isPlaying = true;
+          playButton.style.backgroundImage =
+            "url('../assets/images/sonNon.png')";
+        }
+      });
 
       function createSquare(className) {
         var square = document.createElement('div');
@@ -76,8 +124,7 @@
           ) {
             clearInterval(alienInterval);
             clearInterval(rocketInterval);
-            alert('Game Over! Score: ' + score);
-            resetGame();
+            showGameOver();
           }
         }
 
@@ -93,6 +140,7 @@
             astronautRect.top + astronautRect.height > rocketRect.top
           ) {
             gameContainer.removeChild(rocket);
+            playSound();
             updateScore();
           }
         }
@@ -163,6 +211,13 @@
         startGame();
       });
 
+      startAgainButton.addEventListener('click', function () {
+        gameOverOverlay.style.display = 'none';
+        startButton.disabled = true;
+        resetGame();
+        reStartGame();
+      });
+
       function resetGame() {
         clearInterval(alienInterval);
         clearInterval(rocketInterval);
@@ -184,6 +239,12 @@
         scoreElement.textContent = score;
       }
 
+      function showGameOver() {
+        finalScoreElement.textContent = score;
+        gameOverOverlay.style.display = 'flex';
+        startButton.disabled = false;
+      }
+
       function startGame() {
         alienInterval = setInterval(function () {
           createSquare('alien');
@@ -194,6 +255,16 @@
         }, 3000);
 
         updateGame();
+      }
+
+      function reStartGame() {
+        alienInterval = setInterval(function () {
+          createSquare('alien');
+        }, 1000);
+
+        rocketInterval = setInterval(function () {
+          createSquare('rocket');
+        }, 3000);
       }
     </script>
   </body>

@@ -44,7 +44,7 @@ body {
 #score {
   font-size: 28px;
   background-color: transparent;
-  color: #fff8f8;
+  color: #46ff17;
 }
 #start-button {
   transition: transform 0.2s;
@@ -55,10 +55,38 @@ body {
 .score-paragraphe {
   font-size: 28px;
   background-color: transparent;
-  color: #fff8f8;
+  color: #46ff17;
 }
 .score-and-start {
   display: block;
+  border-radius: 12px;
+  padding: 10px;
+  font-weight: bold;
+}
+
+.game-over-overlay {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.game-over-overlay h1 {
+  font-size: 118px;
+  color: white;
+  margin-bottom: 15px;
+}
+
+.game-over-overlay button {
+  padding: 10px 20px;
+  font-size: 18px;
 }
 .image-clickable-home {
   width: 100px;
@@ -66,4 +94,13 @@ body {
 .image-clickable-home img {
   border-radius: 30px;
   width: 100px;
+}
+#playButton {
+  width: 5px;
+  height: 5px;
+  border-radius: 20px;
+  padding: 20px;
+  background-image: url('../assets/images/sonNon.png');
+  background-size: cover;
+  background-color: aliceblue;
 }
