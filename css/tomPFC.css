@@ -48,6 +48,7 @@ img {
 }
 .conteneur-resultats-avatar {
   display: flex;
+  margin-bottom: 120px;
 }
 .robot-annonce {
   font-size: 24px;

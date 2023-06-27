@@ -2,15 +2,15 @@ let joueurScore = 0;
 let robotScore = 0;
 let egaliteScore = 0;
 let playerNameStorage = localStorage.getItem('player');
+let endGame = false;
 
 const buttons = document.querySelectorAll('button');
 
-for (let i = 0; i < buttons.length; i++) {
-  buttons[i].addEventListener('click', function () {
+const handleClick = (i) => {
+  if (!endGame) {
     const joueur = buttons[i].innerHTML.trim();
     const robot =
       buttons[Math.floor(Math.random() * buttons.length)].innerHTML.trim();
-    console.log(` "${joueur}","${robot}" `);
 
     let resultat = '';
 
@@ -39,7 +39,33 @@ for (let i = 0; i < buttons.length; i++) {
     document.querySelector('.joueur-annonce').innerHTML = humanScore;
     document.querySelector('.robot-annonce').innerHTML = robotDisplayScore;
     document.querySelector('.result-annonce').innerHTML = resultMessage;
-  });
+  }
+
+  console.log(joueurScore);
+
+  function rejouer() {
+    location.reload();
+  }
+
+  let countdown = 5; // Temps restant en secondes
+
+  if (joueurScore === 5 || robotScore === 5) {
+    endGame = true;
+    let endGameMessage = `Le jeu est terminé ! Joueur : ${joueurScore} Robot : ${robotScore}`;
+
+    const countdownInterval = setInterval(() => {
+      countdown--;
+      endGameMessage = ` Joueur : <span style="color: yellow">${joueurScore}</span> Robot : <span style="color: blue">${robotScore}</span> </br> Restart dans : <span style="color: red">${countdown}</span> seconde(s)!  `;
+      document.querySelector('.result-annonce').innerHTML = endGameMessage;
+      if (countdown === 0) {
+        clearInterval(countdownInterval);
+        rejouer();
+      }
+    }, 1000); // Réduire le compte à rebours toutes les 1 seconde (1000 millisecondes)
+  }
+};
+for (let i = 0; i < buttons.length; i++) {
+  buttons[i].addEventListener('click', () => handleClick(i));
 
   //Gestion du son ==>
 
