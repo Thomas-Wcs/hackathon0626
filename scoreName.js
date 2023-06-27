@@ -1,5 +1,6 @@
 let scoreList = localStorage.getItem('scoreList');
 let playerNameOnly = localStorage.getItem('player');
+console.log(scoreList, playerNameOnly);
 
 if (scoreList) {
   scoreList = JSON.parse(scoreList);
