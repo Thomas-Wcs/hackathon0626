@@ -50,7 +50,7 @@ game.events.on('error', function (error) {
 
 function preload() {
   this.load.image('hunter', 'hunterAssets/hunter.jpg');
-  this.load.image('creature', 'hunterAssets/sanglierMove.gif');
+  this.load.image('creature', 'hunterAssets/sanglier.jpg');
   this.load.image('bullet', 'hunterAssets/bullet.jpg');
   this.load.image('poop', 'hunterAssets/caca.gif');
   this.load.image('peta', 'hunterAssets/peta.jpg');
