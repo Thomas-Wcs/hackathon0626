@@ -8,10 +8,23 @@ if (scoreList) {
   scoreList = [];
 }
 
-let playerNameDisplay = '';
+const scoresBody = document.getElementById('scores-body');
+
 for (let i = 0; i < scoreList.length; i++) {
-  const score = scoreList[i].score ? scoreList[i].score : '';
-  playerNameDisplay += `${scoreList[i].name}: ${score}<br>`;
+  const name = scoreList[i].name;
+  const score = scoreList[i].score;
+
+  const row = document.createElement('tr');
+
+  const nameCell = document.createElement('td');
+  nameCell.textContent = name;
+  row.appendChild(nameCell);
+
+  const scoreCell = document.createElement('td');
+  scoreCell.textContent = score;
+  row.appendChild(scoreCell);
+
+  scoresBody.appendChild(row);
 }
 
 document.querySelector('.liste-des-scores-nom').innerHTML = playerNameDisplay;
