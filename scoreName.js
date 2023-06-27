@@ -1,6 +1,5 @@
 let scoreList = localStorage.getItem('scoreList');
 let playerNameOnly = localStorage.getItem('player');
-console.log(scoreList, playerNameOnly);
 
 if (scoreList) {
   scoreList = JSON.parse(scoreList);
@@ -29,7 +28,6 @@ playerForm.addEventListener('submit', function (event) {
   localStorage.setItem('player', JSON.stringify(playerName));
 
   const existingPlayer = scoreList.find((player) => player.name === playerName);
-  console.log(existingPlayer);
 
   if (existingPlayer) {
     existingPlayer.score = score;
