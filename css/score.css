@@ -1,0 +1,30 @@
+.image-clickable-home-scores img {
+  margin-top: 50px;
+  width: 50px;
+}
+#scores-table {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  border-collapse: collapse;
+  width: 100%;
+  background-color: rgb(166, 166, 166);
+  margin-bottom: 80px;
+}
+#scores-table th,
+#scores-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+
+#scores-table th {
+  width: 150px;
+  background-color: #f2f2f2;
+}
+
+#scores-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+#scores-table tbody tr:hover {
+  background-color: #7b7b7b;
+}

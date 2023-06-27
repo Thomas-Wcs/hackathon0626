@@ -3,16 +3,29 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Scores</title>
+    <link rel="stylesheet" href="./css/score.css" />
   </head>
   <link rel="stylesheet" href="../css/index.css" />
   <link rel="icon" href="./assets/images/arcade-game.png" type="image/x-icon" />
   <body>
-    <a href="/index.html" class="neon-link" data-text="Scores">
-      <img src="./assets/images/game-console.png" alt="" />
-    </a>
-    <h1>Scores</h1>
+    <div class="image-clickable-home-scores">
+      <a href="index.html">
+        <img src="./assets/images/unnamed.png" alt="" />
+      </a>
+    </div>
+    <h1>Score Global</h1>
     <div className="game-pack-container">
-      <p class="liste-des-scores-nom">scores</p>
+      <table id="scores-table">
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Score</th>
+          </tr>
+        </thead>
+        <tbody id="scores-body">
+          <!-- Les scores seront ajoutés ici dynamiquement en utilisant JavaScript -->
+        </tbody>
+      </table>
     </div>
     <script src="scoreOnly.js"></script>
   </body>
