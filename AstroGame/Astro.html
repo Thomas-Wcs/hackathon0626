@@ -2,7 +2,6 @@
 <html>
   <head>
     <link rel="stylesheet" href="../css/astroGame.css" />
-    <style></style>
   </head>
   <body>
     <div class="image-clickable-home">
@@ -135,7 +134,6 @@
             astronautRect.top + astronautRect.height > rocketRect.top
           ) {
             gameContainer.removeChild(rocket);
-            console.log('titi');
             playSound();
             updateScore();
           }
@@ -211,7 +209,7 @@
         gameOverOverlay.style.display = 'none';
         startButton.disabled = true;
         resetGame();
-        startGame();
+        reStartGame();
       });
 
       function resetGame() {
@@ -251,6 +249,15 @@
         }, 3000);
 
         updateGame();
+      }
+      function reStartGame() {
+        alienInterval = setInterval(function () {
+          createSquare('alien');
+        }, 1000);
+
+        rocketInterval = setInterval(function () {
+          createSquare('rocket');
+        }, 3000);
       }
     </script>
   </body>
