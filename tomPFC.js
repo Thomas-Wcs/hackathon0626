@@ -2,15 +2,17 @@ let joueurScore = 0;
 let robotScore = 0;
 let egaliteScore = 0;
 let playerNameStorage = localStorage.getItem('player');
+let playerScoreStorage = localStorage.getItem('scoreList');
+let endGame = false;
+console.log(playerScoreStorage);
 
 const buttons = document.querySelectorAll('button');
 
-for (let i = 0; i < buttons.length; i++) {
-  buttons[i].addEventListener('click', function () {
+const handleClick = (i) => {
+  if (!endGame) {
     const joueur = buttons[i].innerHTML.trim();
     const robot =
       buttons[Math.floor(Math.random() * buttons.length)].innerHTML.trim();
-    console.log(` "${joueur}","${robot}" `);
 
     let resultat = '';
 
@@ -32,14 +34,38 @@ for (let i = 0; i < buttons.length; i++) {
     const resultMessage = `Joueur : ${joueur}. Robot : ${robot}. Résultat : ${resultat} !`;
     const humanScore = ` Joueur : ${joueurScore}  `;
     const robotDisplayScore = ` Robot : ${robotScore}  `;
-    const playerNameDisplay = ` hi ${playerNameStorage}: `;
+    const playerNameDisplay = ` Salut <span style="color: yellow">${playerNameStorage}</span>: ! Bonne chance :D`;
 
     document.querySelector('.name-player-and-score').innerHTML =
       playerNameDisplay;
     document.querySelector('.joueur-annonce').innerHTML = humanScore;
     document.querySelector('.robot-annonce').innerHTML = robotDisplayScore;
     document.querySelector('.result-annonce').innerHTML = resultMessage;
-  });
+  }
+
+  function rejouer() {
+    location.reload();
+  }
+
+  let countdown = 5;
+
+  if (joueurScore === 5 || robotScore === 5) {
+    endGame = true;
+    let endGameMessage = `Le jeu est terminé ! Joueur : ${joueurScore} Robot : ${robotScore}`;
+
+    const countdownInterval = setInterval(() => {
+      countdown--;
+      endGameMessage = ` Joueur : <span style="color: yellow">${joueurScore}</span> Robot : <span style="color: blue">${robotScore}</span> </br> Restart dans : <span style="color: red">${countdown}</span> seconde(s)!  `;
+      document.querySelector('.result-annonce').innerHTML = endGameMessage;
+      if (countdown === 0) {
+        clearInterval(countdownInterval);
+        rejouer();
+      }
+    }, 1000);
+  }
+};
+for (let i = 0; i < buttons.length; i++) {
+  buttons[i].addEventListener('click', () => handleClick(i));
 
   //Gestion du son ==>
 

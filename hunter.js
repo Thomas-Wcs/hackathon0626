@@ -13,7 +13,7 @@ var config = {
     preload: preload,
     create: create,
     update: update,
-    createPeta: createPeta, // Ajoutez cette ligne
+    createPeta: createPeta,
   },
 };
 
@@ -37,7 +37,7 @@ var petaCount = 0;
 var atomes;
 var atomesText;
 var isAtomeReady = true;
-var atomeCooldown = 10000;
+var atomeCooldown = 30000;
 var atomeCount = 0;
 var isAtomeActive = false;
 var game = new Phaser.Game(config);
@@ -50,14 +50,24 @@ game.events.on('error', function (error) {
 
 function preload() {
   this.load.image('hunter', 'hunterAssets/hunter.jpg');
-  this.load.image('creature', 'hunterAssets/sanglierMove.gif');
+  this.load.image('creature', 'hunterAssets/sanglier.jpg');
   this.load.image('bullet', 'hunterAssets/bullet.jpg');
   this.load.image('poop', 'hunterAssets/caca.gif');
   this.load.image('peta', 'hunterAssets/peta.jpg');
   this.load.image('atome', 'hunterAssets/atomeGif.gif');
+  this.load.image('background', 'hunterAssets/foret.png');
 }
 
 function create() {
+  this.add
+    .image(0, 0, 'background')
+    .setOrigin(0, 0)
+    .setScale(
+      this.sys.game.config.width /
+        this.textures.get('background').getSourceImage().width,
+      this.sys.game.config.height /
+        this.textures.get('background').getSourceImage().height
+    );
   player = this.physics.add.sprite(
     window.innerWidth * 0.5,
     window.innerHeight * 0.77,
@@ -80,26 +90,12 @@ function create() {
   poops = this.physics.add.group();
   atomes = this.physics.add.group();
 
-  this.physics.add.collider(
-    bullets,
-    creatures,
-    hitCreature,
-    hitPetacall,
-    null,
-    this
-  );
-  this.physics.add.collider(player, creatures, hitPlayer, null, this);
-  this.physics.add.collider(player, poops, hitPoop, null, this);
-  this.physics.add.collider(
-    atomes,
-    creatures,
-    hitCreature,
-    hitPetacall,
-    null,
-    this
-  );
+  this.physics.add.collider(bullets, creatures, hitCreatureBullet, null, this);
+  this.physics.add.collider(player, creatures, hitPlayerCreature, null, this);
+  this.physics.add.collider(player, poops, hitPlayerPoop, null, this);
+  this.physics.add.collider(atomes, creatures, hitCreatureAtom, null, this);
   this.physics.add.collider(atomes, peta, hitPeta, null, this);
-  this.physics.add.collider(atomes, player, hitPlayer, null, this);
+  this.physics.add.collider(atomes, player, hitPlayerAtome, null, this);
 
   scoreText = this.add
     .text(config.width - 16, 16, 'Score: 0', {
@@ -223,58 +219,84 @@ function update(time) {
   if (time > nextPoopTime) {
     let creature = Phaser.Utils.Array.GetRandom(creatures.getChildren());
     if (creature) {
-      let newPoop = poops.create(creature.x, creature.y, 'poop');
+      let newPoop = poops.create(creature.x, 0, 'poop');
       newPoop.setScale(0.1);
       newPoop.setVelocityY(100);
-      nextPoopTime = time + 12000;
+      nextPoopTime = time + 5000;
     }
   }
 
-  if (petaCount % 3 === 0 && petaCount > 0 && !peta) {
-    createPeta.call(this);
-  }
-}
-
-function hitPetacall(bullet, creature) {
-  bullet.setActive(false);
-  bullet.setVisible(false);
-  creature.disableBody(true, true);
-  score += 10;
-  scoreText.setText('Score: ' + score);
-  petaCount++;
-}
-
-function hitPlayer(player, creature) {
-  creature.disableBody(true, true);
-  lives -= 1;
-  livesText.setText('Lives: ' + lives);
-}
-
-function hitPoop(player, poop) {
-  poop.disableBody(true, true);
-  health -= 10;
-  healthText.setText('Health: ' + health);
-  if (health <= 0) {
+  if (health <= 0 && lives > 0) {
     health = 100;
     healthText.setText('Health: ' + health);
     lives -= 1;
     livesText.setText('Lives: ' + lives);
   }
+
+  if (lives === 0) {
+    // Si les vies sont à 0, affiche "game over" et arrête le jeu
+    var gameOverText = this.add.text(
+      config.width / 2,
+      config.height / 2,
+      'Game Over',
+      {
+        fontSize: '64px',
+        color: '#ffffff',
+      }
+    );
+    gameOverText.setOrigin(0.5);
+    this.physics.pause(); // Pause la physique du jeu
+    player.setTint(0xff0000); // Change la couleur du joueur pour indiquer qu'il est "mort"
+    player.anims.play('turn'); // Si vous avez une animation spécifique pour le joueur "mort"
+
+    this.time.removeAllEvents(); // Stop all timed events
+    cursors.left.isDown = false; // Stop player movement
+    cursors.right.isDown = false; // Stop player movement
+    spaceKey.isDown = false; // Stop player shooting
+  }
+}
+
+function hitCreatureBullet(bullet, creature) {
+  bullet.destroy();
+  creature.setActive(false);
+  creature.setVisible(false);
+
+  score += 10;
+  scoreText.setText('Score: ' + score);
+  petaCount++;
+  if (petaCount % 3 == 0) {
+    createPeta.call(this);
+  }
+}
+
+function hitPlayerCreature(player, creature) {
+  creature.disableBody(true, true);
+  health -= 50;
+  healthText.setText('Health: ' + health);
+}
+
+function hitPlayerPoop(player, poop) {
+  poop.disableBody(true, true);
+  health -= 10;
+  healthText.setText('Health: ' + health);
+}
+
+function hitPlayerAtome(player, atome) {
+  atome.disableBody(true, true);
+  lives -= 1;
+  livesText.setText('Lives: ' + lives);
 }
 
 function hitPeta(atome, peta) {
-  peta.disableBody(true, true);
-  score += 10;
-  scoreText.setText('Score: ' + score);
+  if (atome.texture.key === 'atome' && peta.texture.key === 'peta') {
+    atome.disableBody(true, true);
+    peta.disableBody(true, true);
+    score += 10;
+    scoreText.setText('Score: ' + score);
+  }
 }
 
-function hitPlayer(atome, player) {
-  player.disableBody(true, true);
-  score += 10;
-  scoreText.setText('Score: ' + score);
-}
-
-function hitCreature(atome, creature) {
+function hitCreatureAtom(atome, creature) {
   creature.disableBody(true, true);
   score += 10;
   scoreText.setText('Score: ' + score);
@@ -286,10 +308,11 @@ function createPeta() {
     Phaser.Math.Between(-300, -100),
     'peta'
   );
-  peta.setScale(0.5).setGravityY(100);
+  peta.setBounce(0);
+  peta.setVelocity(0, 0);
+  peta.setScale(0.2).setGravityY(80);
   peta.setImmovable(true);
-  this.physics.add.collider(peta, player, hitPlayer, null, this);
-  this.physics.add.collider(peta, atomes, hitPeta, null, this);
+  this.physics.add.collider(player, peta, hitPlayerAtome, null, this);
 }
 
 var Bullet = new Phaser.Class({

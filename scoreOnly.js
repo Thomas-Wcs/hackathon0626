@@ -27,4 +27,4 @@ for (let i = 0; i < scoreList.length; i++) {
   scoresBody.appendChild(row);
 }
 
-document.querySelector('.liste-des-scores-nom').innerHTML = playerNameDisplay;
+document.querySelector('.liste-des-scores-nom').innerHTML = scoreList;
