@@ -1,7 +1,5 @@
 let scoreList = localStorage.getItem('scoreList');
 let playerNameOnly = localStorage.getItem('player');
-// console.log(playerNameOnly);
-// console.log(existingPlayer);
 
 if (scoreList) {
   scoreList = JSON.parse(scoreList);

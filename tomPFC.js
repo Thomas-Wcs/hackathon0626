@@ -2,7 +2,6 @@ let joueurScore = 0;
 let robotScore = 0;
 let egaliteScore = 0;
 let playerNameStorage = localStorage.getItem('player');
-console.log(playerNameStorage);
 
 const buttons = document.querySelectorAll('button');
 
