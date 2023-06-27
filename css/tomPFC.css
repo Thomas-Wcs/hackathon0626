@@ -36,11 +36,10 @@ h4 {
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 30px;
   padding: 1%;
+  text-align: center;
 }
 img {
   width: 100px;
-  background-color: aliceblue;
-  margin-top: 15%;
 }
 .result-annonce {
   font-size: 20px;
@@ -69,8 +68,11 @@ img {
   border-radius: 30px;
 }
 #playButton {
-  width: 40px;
-  height: 40px;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 15px;
+  height: 15px;
   border-radius: 30px;
   padding: 25px;
   background-image: url('../assets/images/son2.png');
