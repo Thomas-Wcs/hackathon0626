@@ -37,14 +37,15 @@ body {
 #start-button {
   font-size: 38px;
   background-color: transparent;
-  color: #f20000;
+  color: #fff;
   border: none;
   outline: none;
 }
+
 #score {
   font-size: 28px;
   background-color: transparent;
-  color: #46ff17;
+  color: #fff;
 }
 #start-button {
   transition: transform 0.2s;
@@ -55,25 +56,13 @@ body {
 .score-paragraphe {
   font-size: 28px;
   background-color: transparent;
-  color: #46ff17;
+  color: #fff;
 }
 .score-and-start {
   display: block;
   border-radius: 12px;
   padding: 10px;
   font-weight: bold;
-  position: relative;
-  padding: 16px 30px;
-  font-size: 1.5rem;
-  color: var(--color);
-  border: 2px solid rgba(0, 0, 0, 0.5);
-  border-radius: 4px;
-  text-shadow: 0 0 15px var(--color);
-  text-decoration: none;
-  text-transform: uppercase;
-  letter-spacing: 0.1rem;
-  transition: 0.5s;
-  z-index: 1;
 }
 
 .game-over-overlay {
