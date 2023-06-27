@@ -13,7 +13,7 @@ var config = {
     preload: preload,
     create: create,
     update: update,
-    createPeta: createPeta, // Ajoutez cette ligne
+    createPeta: createPeta,
   },
 };
 
@@ -56,14 +56,18 @@ function preload() {
   this.load.image('peta', 'hunterAssets/peta.jpg');
   this.load.image('atome', 'hunterAssets/atomeGif.gif');
   this.load.image('background', 'hunterAssets/foret.png');
-  this.load.on('filecomplete-image-background', function () {
-    console.log('Image de fond chargée avec succès');
-  });
 }
 
 function create() {
-  this.add.image(0, 0, 'background').setOrigin(0);
-
+  this.add
+    .image(0, 0, 'background')
+    .setOrigin(0, 0)
+    .setScale(
+      this.sys.game.config.width /
+        this.textures.get('background').getSourceImage().width,
+      this.sys.game.config.height /
+        this.textures.get('background').getSourceImage().height
+    );
   player = this.physics.add.sprite(
     window.innerWidth * 0.5,
     window.innerHeight * 0.77,
