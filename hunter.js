@@ -40,8 +40,9 @@ var isAtomeReady = true;
 var atomeCooldown = 10000;
 var atomeCount = 0;
 var isAtomeActive = false;
-
 var game = new Phaser.Game(config);
+
+let playerNameStorage = localStorage.getItem('player');
 
 game.events.on('error', function (error) {
   console.error(error);

@@ -2,7 +2,8 @@ let joueurScore = 0;
 let robotScore = 0;
 let egaliteScore = 0;
 
-// const playerName = prompt('Veuillez entrer votre nom :');
+let player = localStorage.getItem('player');
+
 const buttons = document.querySelectorAll('button');
 
 for (let i = 0; i < buttons.length; i++) {
