@@ -34,7 +34,7 @@ const handleClick = (i) => {
     const resultMessage = `Joueur : ${joueur}. Robot : ${robot}. Résultat : ${resultat} !`;
     const humanScore = ` Joueur : ${joueurScore}  `;
     const robotDisplayScore = ` Robot : ${robotScore}  `;
-    const playerNameDisplay = ` hi ${playerNameStorage}: `;
+    const playerNameDisplay = ` Salut <span style="color: yellow">${playerNameStorage}</span>: ! Bonne chance :D`;
 
     document.querySelector('.name-player-and-score').innerHTML =
       playerNameDisplay;

@@ -19,7 +19,7 @@ playerForm.addEventListener('submit', function (event) {
 
   const playerScore = {
     name: playerName,
-    score: score,
+    score: 0,
   };
 
   scoreList.push(playerScore);
