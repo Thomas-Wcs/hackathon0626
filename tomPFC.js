@@ -58,7 +58,6 @@ const handleClick = (i) => {
       endGameMessage = ` Joueur : <span style="color: yellow">${joueurScore}</span> Robot : <span style="color: blue">${robotScore}</span> </br> Restart dans : <span style="color: red">${countdown}</span> seconde(s)!  `;
       document.querySelector('.result-annonce').innerHTML = endGameMessage;
       if (countdown === 0) {
-        localStorage.setItem('scoreList', JSON.stringify(joueurScore));
         clearInterval(countdownInterval);
         rejouer();
       }
