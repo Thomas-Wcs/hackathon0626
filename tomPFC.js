@@ -2,7 +2,9 @@ let joueurScore = 0;
 let robotScore = 0;
 let egaliteScore = 0;
 let playerNameStorage = localStorage.getItem('player');
+let playerScoreStorage = localStorage.getItem('scoreList');
 let endGame = false;
+console.log(playerScoreStorage);
 
 const buttons = document.querySelectorAll('button');
 
@@ -41,13 +43,11 @@ const handleClick = (i) => {
     document.querySelector('.result-annonce').innerHTML = resultMessage;
   }
 
-  console.log(joueurScore);
-
   function rejouer() {
     location.reload();
   }
 
-  let countdown = 5; // Temps restant en secondes
+  let countdown = 5;
 
   if (joueurScore === 5 || robotScore === 5) {
     endGame = true;
@@ -58,10 +58,11 @@ const handleClick = (i) => {
       endGameMessage = ` Joueur : <span style="color: yellow">${joueurScore}</span> Robot : <span style="color: blue">${robotScore}</span> </br> Restart dans : <span style="color: red">${countdown}</span> seconde(s)!  `;
       document.querySelector('.result-annonce').innerHTML = endGameMessage;
       if (countdown === 0) {
+        localStorage.setItem('scoreList', JSON.stringify(joueurScore));
         clearInterval(countdownInterval);
         rejouer();
       }
-    }, 1000); // Réduire le compte à rebours toutes les 1 seconde (1000 millisecondes)
+    }, 1000);
   }
 };
 for (let i = 0; i < buttons.length; i++) {
