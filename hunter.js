@@ -81,24 +81,10 @@ function create() {
   poops = this.physics.add.group();
   atomes = this.physics.add.group();
 
-  this.physics.add.collider(
-    bullets,
-    creatures,
-    hitCreature,
-    hitPetacall,
-    null,
-    this
-  );
+  this.physics.add.collider(bullets, creatures, hitCreatureBullet, null, this);
   this.physics.add.collider(player, creatures, hitPlayer, null, this);
   this.physics.add.collider(player, poops, hitPoop, null, this);
-  this.physics.add.collider(
-    atomes,
-    creatures,
-    hitCreature,
-    hitPetacall,
-    null,
-    this
-  );
+  this.physics.add.collider(atomes, creatures, hitCreatureAtom, null, this);
   this.physics.add.collider(atomes, peta, hitPeta, null, this);
   this.physics.add.collider(atomes, player, hitPlayer, null, this);
 
@@ -230,29 +216,48 @@ function update(time) {
       nextPoopTime = time + 12000;
     }
   }
-  if (petaCount % 3 == 0 && petaCount > 0 && !peta) {
+}
+
+function hitCreatureBullet(bullet, creature) {
+  console.log('tuc');
+
+  bullet.destroy();
+  creature.setActive(false);
+  creature.setVisible(false);
+
+  score += 10;
+  scoreText.setText('Score: ' + score);
+  petaCount++;
+  if (petaCount % 3 == 0) {
     createPeta.call(this);
   }
 }
 
-function hitPetacall(bullet, creature) {
-  bullet.setActive(false);
-  bullet.setVisible(false);
-  score += 10;
-  scoreText.setText('Score: ' + score);
-  petaCount++;
-}
+// function hitPlayer(player, obj) {
+//   obj.disableBody(true, true);
+//   lives -= 1;
+//   livesText.setText('Lives: ' + lives);
 
+//   if (obj.texture.key === 'peta') {
+//     peta = null;
+//     // Réinitialisez la position du joueur ici
+//     player.setPosition(window.innerWidth * 0.5, window.innerHeight * 0.75);
+//     player.setVelocity(0, 0); // Empêche le joueur de bouger
+//   }
+// }
 function hitPlayer(player, obj) {
   obj.disableBody(true, true);
-  lives -= 1;
-  livesText.setText('Lives: ' + lives);
-
+  console.log(obj.texture.key);
   if (obj.texture.key === 'peta') {
+    lives -= 3; // Ici on décrémente de 3 vies au lieu d'une.
+    livesText.setText('Lives: ' + lives);
     peta = null;
     // Réinitialisez la position du joueur ici
     player.setPosition(window.innerWidth * 0.5, window.innerHeight * 0.75);
     player.setVelocity(0, 0); // Empêche le joueur de bouger
+  } else {
+    lives -= 1;
+    livesText.setText('Lives: ' + lives);
   }
 }
 
@@ -275,7 +280,7 @@ function hitPeta(player, peta) {
   peta = null;
 }
 
-function hitCreature(atome, creature) {
+function hitCreatureAtom(atome, creature) {
   creature.disableBody(true, true);
   score += 10;
   scoreText.setText('Score: ' + score);
@@ -291,7 +296,7 @@ function createPeta() {
   peta.setVelocity(0, 0);
   peta.setScale(0.5).setGravityY(100);
   peta.setImmovable(true);
-  console.log('sss');
+  this.physics.add.collider(player, peta, hitPlayer, null, this);
 }
 
 var Bullet = new Phaser.Class({
