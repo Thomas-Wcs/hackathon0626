@@ -55,7 +55,7 @@ function preload() {
   this.load.image('poop', 'hunterAssets/caca.gif');
   this.load.image('peta', 'hunterAssets/peta.jpg');
   this.load.image('atome', 'hunterAssets/atomeGif.gif');
-  this.load.image('background', 'hunterAssets/foret.png');
+  this.load.image('background', 'hunterAssets/foret.jpg');
 }
 
 function create() {
