@@ -11,6 +11,10 @@ body {
 h1 {
   text-align: center;
 }
+.image-clickable-morpion img {
+  width: 60px;
+  margin: 2%;
+}
 
 .cell {
   height: 100px;
