@@ -55,7 +55,7 @@ function preload() {
   this.load.image('poop', 'hunterAssets/caca.gif');
   this.load.image('peta', 'hunterAssets/peta.jpg');
   this.load.image('atome', 'hunterAssets/atomeGif.gif');
-  this.load.image('background', 'hunterAssets/foret.jpg');
+  this.load.image('background', 'hunterAssets/foret.png');
   this.load.on('filecomplete-image-background', function () {
     console.log('Image de fond chargée avec succès');
   });
