@@ -2,7 +2,8 @@ let joueurScore = 0;
 let robotScore = 0;
 let egaliteScore = 0;
 
-// const playerName = prompt('Veuillez entrer votre nom :');
+let player = localStorage.getItem('player');
+
 const buttons = document.querySelectorAll('button');
 
 for (let i = 0; i < buttons.length; i++) {
@@ -29,7 +30,6 @@ for (let i = 0; i < buttons.length; i++) {
       robotScore++;
     }
 
-    const scoreMessage = `Scores : Joueur ${joueurScore} | Robot ${robotScore} | Égalité ${egaliteScore}`;
     const resultMessage = `Joueur : ${joueur}. Robot : ${robot}. Résultat : ${resultat} !`;
     const humanScore = ` Joueur : ${joueurScore}  `;
     const robotDisplayScore = ` Robot : ${robotScore}  `;
@@ -38,5 +38,35 @@ for (let i = 0; i < buttons.length; i++) {
     document.querySelector('.robot-annonce').innerHTML = robotDisplayScore;
 
     document.querySelector('.result-annonce').innerHTML = resultMessage;
+  });
+
+  //Gestion du son ==>
+
+  const cardClickButtons = document.querySelectorAll(
+    '.conteneur-buttons button'
+  );
+  const clickSoundCart = document.getElementById('clickCardSound');
+
+  cardClickButtons.forEach(function (button) {
+    button.addEventListener('click', function () {
+      clickSoundCart.play();
+    });
+  });
+
+  const playButton = document.getElementById('playButton');
+  const clickSound = document.getElementById('clickSound');
+
+  let isPlaying = false;
+
+  playButton.addEventListener('click', function () {
+    if (isPlaying) {
+      clickSound.pause();
+      isPlaying = false;
+      playButton.style.backgroundImage = "url('./assets/images/son2.png')";
+    } else {
+      clickSound.play();
+      isPlaying = true;
+      playButton.style.backgroundImage = "url('./assets/images/sonNon.png')";
+    }
   });
 }
