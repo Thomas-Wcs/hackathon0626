@@ -1,8 +1,7 @@
 let joueurScore = 0;
 let robotScore = 0;
 let egaliteScore = 0;
-
-let player = localStorage.getItem('player');
+let playerNameStorage = localStorage.getItem('player');
 
 const buttons = document.querySelectorAll('button');
 
@@ -33,10 +32,12 @@ for (let i = 0; i < buttons.length; i++) {
     const resultMessage = `Joueur : ${joueur}. Robot : ${robot}. Résultat : ${resultat} !`;
     const humanScore = ` Joueur : ${joueurScore}  `;
     const robotDisplayScore = ` Robot : ${robotScore}  `;
+    const playerNameDisplay = ` hi ${playerNameStorage}: `;
 
+    document.querySelector('.name-player-and-score').innerHTML =
+      playerNameDisplay;
     document.querySelector('.joueur-annonce').innerHTML = humanScore;
     document.querySelector('.robot-annonce').innerHTML = robotDisplayScore;
-
     document.querySelector('.result-annonce').innerHTML = resultMessage;
   });
 
